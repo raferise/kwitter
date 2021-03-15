@@ -17,3 +17,7 @@ export const logoutRequest = (token) => {
     headers: { Authorization: "Bearer " + token },
   }).then((res) => res.json());
 };
+
+export const createNewUser = (username, displayName, password) => {
+  return "indev";
+}

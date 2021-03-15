@@ -10,5 +10,9 @@ See my.kenzie.academy for details.
 ## Credits and References
 
 Team Members:
-
+- Riley Ferise
+- Helina Mengstu
+- Tim Chandler
+- Amilcar Cornier
+- Nigel Belcher
 References

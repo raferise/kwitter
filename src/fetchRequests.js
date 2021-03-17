@@ -8,12 +8,20 @@ export const loginRequest = (username, password) => {
       username,
       password,
     }),
-  })
-    .then((res) => res.json())
+  }).then((res) => res.json());
 };
 
 export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
     headers: { Authorization: "Bearer " + token },
+  }).then((res) => res.json());
+};
+
+export const removeLike = (id) => {
+  return fetch(baseURL + "likes/" + { likeID }, {
+    method: "DELETE",
+    body: JSON.stringify({
+      id,
+    }),
   }).then((res) => res.json());
 };

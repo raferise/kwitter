@@ -8,12 +8,21 @@ export const loginRequest = (username, password) => {
       username,
       password,
     }),
-  })
-    .then((res) => res.json())
+  }).then((res) => res.json());
 };
 
 export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
     headers: { Authorization: "Bearer " + token },
+  }).then((res) => res.json());
+};
+
+export const addLike = (messageId) => {
+  return fetch(baseURL + "likes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      messageId,
+    }),
   }).then((res) => res.json());
 };

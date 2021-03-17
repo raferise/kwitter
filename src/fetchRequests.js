@@ -17,3 +17,9 @@ export const logoutRequest = (token) => {
     headers: { Authorization: "Bearer " + token },
   }).then((res) => res.json());
 };
+
+export const pictureRequest = (username) => {
+  return fetch(baseURL + `users/${username}/picture`, {
+  })
+  .then((res) => res.json());
+};

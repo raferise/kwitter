@@ -17,7 +17,7 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const removeLike = (likeId, token) => {
+export const removeLike = (token, likeId) => {
   return fetch(baseURL + "likes/" + likeId, {
     method: "DELETE",
     headers: { Authorization: "Bearer " + token },

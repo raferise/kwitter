@@ -29,7 +29,6 @@ export const getMessage = (limit, offset, username) => {
   if (offset !== undefined) queryParams.push("offset="+offset);
   if (username !== undefined) queryParams.push("username="+username);
   queryParams = (queryParams.length === 0) ? "" : "?" + queryParams.join("&");
-  console.log(queryParams);
   return fetch(baseURL + "/messages" + queryParams, {
   })
   .then((res) => res.json());

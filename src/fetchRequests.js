@@ -17,10 +17,10 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const addLike = (messageId) => {
+export const addLike = (token, messageId) => {
   return fetch(baseURL + "likes", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
     body: JSON.stringify({
       messageId,
     }),

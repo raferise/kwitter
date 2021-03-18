@@ -17,7 +17,7 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const deleteMessage = (messageId, token) => {
+export const deleteMessage = (token, messageId) => {
   return fetch(baseURL + "messages/" + messageId, {
     method: "DELETE",
     headers: { Authorization: "Bearer " + token },

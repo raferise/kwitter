@@ -17,11 +17,9 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const removeLike = (id) => {
-  return fetch(baseURL + "likes/" + { likeID }, {
+export const removeLike = (likeId, token) => {
+  return fetch(baseURL + "likes/" + likeId, {
     method: "DELETE",
-    body: JSON.stringify({
-      id,
-    }),
+    headers: { Authorization: "Bearer " + token },
   }).then((res) => res.json());
 };

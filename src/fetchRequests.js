@@ -18,11 +18,6 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const pictureRequest = (username) => {
-  return fetch(baseURL + `users/${username}/picture`, {
-  })
-  .then((res) => res.json());
-};
 export const getMessage = (limit, offset, username) => {
   let queryParams = [];
   if (limit !== undefined) queryParams.push("limit="+limit); 

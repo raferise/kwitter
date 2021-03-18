@@ -23,3 +23,14 @@ export const pictureRequest = (username) => {
   })
   .then((res) => res.json());
 };
+export const getMessage = (limit, offset, username) => {
+  let queryParams = [];
+  if (limit !== undefined) queryParams.push("limit="+limit); 
+  if (offset !== undefined) queryParams.push("offset="+offset);
+  if (username !== undefined) queryParams.push("username="+username);
+  queryParams = (queryParams.length === 0) ? "" : "?" + queryParams.join("&");
+  console.log(queryParams);
+  return fetch(baseURL + "/messages" + queryParams, {
+  })
+  .then((res) => res.json());
+};

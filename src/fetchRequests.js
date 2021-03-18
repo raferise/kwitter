@@ -8,12 +8,18 @@ export const loginRequest = (username, password) => {
       username,
       password,
     }),
-  })
-    .then((res) => res.json())
+  }).then((res) => res.json());
 };
 
 export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
     headers: { Authorization: "Bearer " + token },
   }).then((res) => res.json());
+};
+
+export const deleteMessage = (messageId, token) => {
+  return fetch(baseURL + "messages/" + messageId, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token },
+  });
 };

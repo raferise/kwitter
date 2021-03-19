@@ -18,7 +18,7 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const updateUser = (username, password, about, displayName, token) => {
+export const updateUser = (token,username, password, about, displayName) => {
 return fetch(baseURL + "users/" + username, {
   method: "PATCH",
   headers: { Authorization: "Bearer " + token }, 
@@ -27,7 +27,6 @@ return fetch(baseURL + "users/" + username, {
     password,
     about,
     displayName,
-    token,
   }),
 
 })

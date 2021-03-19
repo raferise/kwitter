@@ -18,7 +18,7 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const createMessage = (text,token) => {
+export const createMessage = (token,text) => {
 return fetch (baseURL + "/messages", {
   method:"POST",
   headers: { Authorization: "Bearer " + token },

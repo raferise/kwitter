@@ -1,18 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import MessageItem from "../components/MessageItem";
+import { useStore } from "../store/store";
+
+import Container from "react-bootstrap/Container";
 
 function Home(props) {
+  const messages = useStore((state) => state.messages);
+  const exampleMessage = {text:"VERY IMPORTANT MESSAGE: I am showing important things. I could write so much here, but I choose not to. So much time so many words so so so yes. Ok. Very cool. I hope this looks nice. How are you today? I don't actually care.",
+  username:"test"};
+  
+
   return (
-    <>
-      <h1>Pages</h1>
-      <ul>
-        <li><Link to="/login" >Login</Link></li>
-        <li><Link to="/signup" >Signup</Link></li>
-        <li><Link to="/user/:username" >Userpage</Link></li>
-        <li><Link to="/user/:username/edit" >Edit</Link></li>
-        <li><Link to="/debug" >TestHub</Link></li>
-      </ul>
-    </>
+  <>
+    <Header />
+    <Container fluid="md">
+      <MessageItem message={exampleMessage}></MessageItem>
+      {messages.map(msg => (
+        <MessageItem message={msg}/>
+      ))}
+    </Container>
+  </>
   );
 }
 

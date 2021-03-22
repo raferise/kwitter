@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.kwitter-body {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+.userheader img {
+  object-fit: cover;
+  border-radius: 100%;
+  background: #e0e0e0;
+}
+.userheader {
+  display: flex;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.userheader::after {
+  display: none;
+}
+.likebar, .userheader>div:last-of-type {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.userheader>div:only-of-type {
+  flex-direction: column;
+  text-align: right;
+}
+.invisible-dropdown::after {
+  display: none;
+}
+.invisible-dropdown .dropdown-toggle {
+  display: contents;
+}
+.invisible-dropdown .dropdown-toggle::after {
+  display: none;
+}

@@ -30,6 +30,14 @@ export const createNewUser = (username, displayName, password) => {
   }).then((res) => res.json());
 }
 
+
 export const getUser = (username) => {
   return fetch(baseURL + "users/" + username).then((res) => res.json());
+}
+
+export const deleteUser = (token, username) => {
+  return fetch(baseURL + "users/" + username, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token },
+  }).then((res) => res.json());
 }

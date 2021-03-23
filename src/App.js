@@ -1,12 +1,11 @@
 import { Switch, Route } from "react-router-dom";
-import Login from "./components/Login";
-import { LOGIN } from "./store/store";
-import Edit from "./views/Edit";
-
 import Home from "./views/Home";
-import NotFound from "./views/NotFound";
+import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Userpage from "./views/Userpage";
+import Edit from "./views/Edit";
+import TestHub from "./views/TestHub";
+import NotFound from "./views/NotFound";
 
 function App() {
   return (
@@ -17,6 +16,7 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/user/:username" component={Userpage} />
         <Route exact path="/user/:username/edit" component={Edit} />
+        <Route exact path="/debug" component={TestHub} />
         <Route component={NotFound} />
       </Switch>
     </div>

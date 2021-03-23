@@ -11,11 +11,17 @@ export const loginRequest = (username, password) => {
   }).then((res) => res.json());
 };
 
-
 export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
     headers: { Authorization: "Bearer " + token },
   }).then((res) => res.json());
+};
+
+export const deleteMessage = (token, messageId) => {
+  return fetch(baseURL + "messages/" + messageId, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token },
+  });
 };
 
 export const addLike = (token, messageId) => {

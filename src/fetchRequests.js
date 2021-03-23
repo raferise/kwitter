@@ -16,6 +16,15 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
+export const getMessages = (limit, offset, username) => {
+  let queryParams = [];
+  if (limit !== undefined) queryParams.push("limit="+limit); 
+  if (offset !== undefined) queryParams.push("offset="+offset);
+  if (username !== undefined) queryParams.push("username="+username);
+  queryParams = (queryParams.length === 0) ? "" : "?" + queryParams.join("&");
+  return fetch(baseURL + "messages" + queryParams).then((res) => res.json());
+};
+
 export const updateUser = (token,username, password, about, displayName) => {
   return fetch(baseURL + "users/" + username, {
     method: "PATCH",

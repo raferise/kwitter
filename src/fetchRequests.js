@@ -1,3 +1,4 @@
+
 const baseURL = "https://socialapp-api.herokuapp.com/";
 
 export const loginRequest = (username, password) => {
@@ -15,6 +16,12 @@ export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
     headers: { Authorization: "Bearer " + token },
   }).then((res) => res.json());
+};
+
+export const pictureRequest = (username) => {
+  return fetch(baseURL + `users/${username}/picture`, {
+  })
+  .then((res) => res.json());
 };
 
 export const deleteMessage = (token, messageId) => {

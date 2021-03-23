@@ -33,7 +33,7 @@ code {
 .userheader::after {
   display: none;
 }
-.likebar, .userheader>div:last-of-type {
+.align-right, .userheader>div:last-of-type {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;

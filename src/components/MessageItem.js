@@ -54,7 +54,7 @@ function MessageItem(props) {
         <Card.Text className="mt-3">
           {props.message.text}
         </Card.Text>
-        <div className="likebar">
+        <div className="align-right">
           {liked ? 
             <Button variant="outline-info" onClick={handleUnlike}>Unlike</Button>
             :

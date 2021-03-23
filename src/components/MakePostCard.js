@@ -24,7 +24,9 @@ function MakeAccountCard(props) {
           <Form.Group>
             <Form.Control as="textarea" size="lg" rows={5} placeholder="Say something..." ref={text}/>
           </Form.Group>
-        <Button variant="primary" type="submit" onClick={handlePost}>Post</Button>
+          <div className="align-right">
+            <Button variant="primary" type="submit" onClick={handlePost}>Post</Button>
+          </div>
         </Form>
       </Card.Body>
     </Card>

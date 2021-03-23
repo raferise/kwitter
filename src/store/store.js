@@ -1,6 +1,6 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import { getMessages, getUser, loginRequest } from "../fetchRequests";
+import { getMessages, getUser, loginRequest, logoutRequest } from "../fetchRequests";
 
 // define reducer function
 const reducer = (set) => ({
@@ -17,7 +17,11 @@ const reducer = (set) => ({
       //bad login
     }
   },
-  logout: () => set(state => ({user: {token: ""}})),
+  //performs a logout request
+  logout: async () => set(async state => {
+    let resp = await logoutRequest(state.user.token);
+    if (resp.statusCode === 200) set(state => ({user: {token: ""}}));
+  }),
   loadMoreMessages: (username) => set(async state => { //async doesn't change state but can be used to ref previous state before request
     //if username has changed, use no offset and remove previous messages.
     const differentUsername = state.lastMessagesUser !== username;

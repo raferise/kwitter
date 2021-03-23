@@ -17,7 +17,7 @@ function MessageItem(props) {
   return (
   <>
   <Navbar bg="light" expand="lg">
-    <Navbar.Brand className="mr-auto" style={{fontSize:"xx-large"}}>Kwitter Feed</Navbar.Brand>
+    <Navbar.Brand className="mr-auto">Kwitter Feed</Navbar.Brand>
     {user.token ? 
       <Dropdown className="invisible-dropdown">
         <Dropdown.Toggle variant="none">

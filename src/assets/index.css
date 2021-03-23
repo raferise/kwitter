@@ -49,3 +49,17 @@ code {
 .invisible-dropdown .dropdown-toggle::after {
   display: none;
 }
+
+.navbar-brand {
+  font-size: xx-large;
+}
+
+.make-account-suggestion {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.make-account-suggestion h2 {
+  font-size: 2.5rem;
+}

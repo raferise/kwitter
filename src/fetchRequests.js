@@ -9,7 +9,7 @@ export const loginRequest = (username, password) => {
       password,
     }),
   })
-    .then((res) => res.json())
+    .then((res) => res.json());
 };
 
 export const logoutRequest = (token) => {
@@ -19,18 +19,47 @@ export const logoutRequest = (token) => {
 };
 
 export const updateUser = (token,username, password, about, displayName) => {
-return fetch(baseURL + "users/" + username, {
-  method: "PATCH",
-  headers: { Authorization: "Bearer " + token }, 
-
-  body: JSON.stringify({
-    password,
-    about,
-    displayName,
-  }),
-
-})
-
-.then((res) => res.json())
-
+  return fetch(baseURL + "users/" + username, {
+    method: "PATCH",
+    headers: { Authorization: "Bearer " + token }, 
+    body: JSON.stringify({
+      password,
+      about,
+      displayName,
+    }),
+  }).then((res) => res.json());
 };
+
+export const createMessage = (token,text) => {
+  return fetch (baseURL + "/messages", {
+    method:"POST",
+    headers: { Authorization: "Bearer " + token },
+    body: JSON.stringify ({ 
+      text,
+    }),
+  }).then((res) => res.json());
+};
+
+export const createNewUser = (username, displayName, password) => {
+  return fetch(baseURL + "users", {
+    method: "POST",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      username,
+      displayName,
+      password
+    }),
+  }).then((res) => res.json());
+};
+
+export const getUser = (username) => {
+  return fetch(baseURL + "users/" + username).then((res) => res.json());
+};
+
+export const deleteUser = (token, username) => {
+  return fetch(baseURL + "users/" + username, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token },
+  }).then((res) => res.json());
+};
+

@@ -8,9 +8,7 @@ export const loginRequest = (username, password) => {
       username,
       password,
     }),
-  })
-    .then((res) => res.json());
-};
+  }).then((res) => res.json());
 
 export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
@@ -63,3 +61,9 @@ export const deleteUser = (token, username) => {
   }).then((res) => res.json());
 };
 
+export const removeLike = (token, likeId) => {
+  return fetch(baseURL + "likes/" + likeId, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token },
+  }).then((res) => res.json());
+};

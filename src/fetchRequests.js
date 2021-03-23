@@ -1,3 +1,6 @@
+const cache = {
+  users:{}
+}
 
 const baseURL = "https://socialapp-api.herokuapp.com/";
 
@@ -16,12 +19,6 @@ export const logoutRequest = (token) => {
   return fetch(baseURL + "auth/logout", {
     headers: { Authorization: "Bearer " + token },
   }).then((res) => res.json());
-};
-
-export const pictureRequest = (username) => {
-  return fetch(baseURL + `users/${username}/picture`, {
-  })
-  .then((res) => res.json());
 };
 
 export const deleteMessage = (token, messageId) => {
@@ -84,9 +81,27 @@ export const createNewUser = (username, displayName, password) => {
   }).then((res) => res.json());
 };
 
-export const getUser = (username) => {
-  return fetch(baseURL + "users/" + username).then((res) => res.json());
+export const getUser = (username, useCache=true) => {
+  let cached = cache.users[username];
+  if (cached && useCache) return cached;
+  let request = fetch(baseURL + "users/" + username).then(res => res.json()).then(async (res) => {
+    res.user.pictureRaw = await getPicture(res.user.username);
+    return res;
+  });
+  cache.users[username] = request;
+  return request;
 };
+
+//https://medium.com/front-end-weekly/fetching-images-with-the-fetch-api-fb8761ed27b2
+export const getPicture = async (username) => {
+  let resp = await fetch(baseURL + `users/${username}/picture`)
+  if (resp.ok) {
+    let buffer = await resp.arrayBuffer();
+    return 'data:image/jpeg;base64,'+window.btoa([].slice.call(new Uint8Array(buffer)).reduce((binary, byte) => binary+String.fromCharCode(byte), ""));
+  } else {
+    return "placeholder.png";
+  }
+}
 
 export const deleteUser = (token, username) => {
   return fetch(baseURL + "users/" + username, {

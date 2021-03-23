@@ -17,7 +17,7 @@ const reducer = (set) => ({
   login: async (username, password) => {
     let loginResp = await loginRequest(username, password);
     if (loginResp.username) {
-      let userData = await getUser(loginResp.username);
+      let userData = await getUser(loginResp.username, false);
       set(state => ({user: {...loginResp, ...userData.user}}))
     } else {
       set(state => ({alerts:[...state.alerts, makeAlert(state.alerts.length, "Error signing in", loginResp.message)]}));

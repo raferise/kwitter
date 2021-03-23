@@ -25,7 +25,7 @@ export const deleteMessage = (token, messageId) => {
   return fetch(baseURL + "messages/" + messageId, {
     method: "DELETE",
     headers: { Authorization: "Bearer " + token },
-  });
+  }).then((res => res.json()));
 };
 
 export const addLike = (token, messageId) => {
@@ -59,11 +59,11 @@ export const updateUser = (token,username, password, about, displayName) => {
   }).then((res) => res.json());
 };
 
-export const createMessage = (token,text) => {
-  return fetch (baseURL + "/messages", {
-    method:"POST",
-    headers: { Authorization: "Bearer " + token },
-    body: JSON.stringify ({ 
+export const createMessage = (token, text) => {
+  return fetch (baseURL + "messages", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+    body: JSON.stringify({ 
       text,
     }),
   }).then((res) => res.json());
@@ -92,16 +92,23 @@ export const getUser = (username, useCache=true) => {
   return request;
 };
 
-//https://medium.com/front-end-weekly/fetching-images-with-the-fetch-api-fb8761ed27b2
 export const getPicture = async (username) => {
   let resp = await fetch(baseURL + `users/${username}/picture`)
   if (resp.ok) {
-    let buffer = await resp.arrayBuffer();
-    return 'data:image/jpeg;base64,'+window.btoa([].slice.call(new Uint8Array(buffer)).reduce((binary, byte) => binary+String.fromCharCode(byte), ""));
+    return await convertBlobToBase64(await resp.blob());
   } else {
     return "placeholder.png";
   }
 }
+//https://gist.github.com/n1ru4l/dc99062577b746e0783410b1298ab897
+const convertBlobToBase64 = blob => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onerror = reject;
+  reader.onload = () => {
+      resolve(reader.result);
+  };
+  reader.readAsDataURL(blob);
+});
 
 export const deleteUser = (token, username) => {
   return fetch(baseURL + "users/" + username, {

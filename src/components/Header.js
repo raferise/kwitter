@@ -6,27 +6,28 @@ import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Card from "react-bootstrap/Card";
 
-function MessageItem(props) {
+function Header(props) {
   const user = useStore((state) => state.user);
+  const logout = useStore((state) => state.logout);
 
   
   function handleSignOut() {
-
+    logout();
   }
 
   return (
   <>
-  <Navbar bg="light" expand="lg">
-    <Navbar.Brand className="mr-auto">Kwitter Feed</Navbar.Brand>
-    {user.token ? 
+    <Navbar bg="light" expand="lg" sticky="top">
+      <Navbar.Brand className="mr-auto">Kwitter Feed</Navbar.Brand>
+      {user.token ? 
       <Dropdown className="invisible-dropdown">
         <Dropdown.Toggle variant="none">
           <div className="userheader">
             <div>
-            <Card.Title>{user.displayName || "Display Name"}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">@{user.username}</Card.Subtitle>
+              <Card.Title>{user.displayName || "Display Name"}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">@{user.username}</Card.Subtitle>
             </div>
-            <img width={64} height={64} className="ml-3" src={user.pictureLocation} alt="Profile Pic"/>
+            <img width={64} height={64} className="ml-3" src={user.pictureRaw} alt="Profile Pic"/>
           </div>
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -42,4 +43,4 @@ function MessageItem(props) {
   )
 }
 
-export default MessageItem;
+export default Header;

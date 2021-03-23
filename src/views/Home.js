@@ -4,27 +4,22 @@ import MessageItem from "../components/MessageItem";
 import MakeAccountCard from "../components/MakeAccountCard";
 import MakePostCard from "../components/MakePostCard";
 import { useStore } from "../store/store";
-
-
+import TestHub from "../views/TestHub";
 import Container from "react-bootstrap/Container";
 
 
 function Home(props) {
-  const { messages, user} = useStore((state) => state);
-  const exampleMessage = {text:"VERY IMPORTANT MESSAGE: I am showing important things. I could write so much here, but I choose not to. So much time so many words so so so yes. Ok. Very cool. I hope this looks nice. How are you today? I don't actually care.",
-  username:"test"};
-  
-
+  const { messages, user } = useStore((state) => state);
   return (
   <>
     <Header />
     <Container fluid="md">
       {user.token ? <MakePostCard /> : <MakeAccountCard />}
-      <MessageItem message={exampleMessage}></MessageItem>
       {messages.map(msg => (
-        <MessageItem message={msg}/>
+        <MessageItem key={msg.username+msg.createdAt} message={msg}/>
       ))}
     </Container>
+    <TestHub />
   </>
   );
 }

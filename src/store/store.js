@@ -1,24 +1,14 @@
 import create from "zustand";
-import { devtools, redux } from "zustand/middleware";
-
-// define the store's initial state
-const initialState = { user: {token: ""}, messages: [] };
-
-// set action types
-export const LOGIN = "LOGIN";
-export const LOGOUT = "LOGOUT";
+import { devtools } from "zustand/middleware";
 
 // define reducer function
-const reducer = (state, action) => {
-  switch (action.type) {
-    case LOGIN:
-      return { user: action.payload };
-    case LOGOUT:
-      return { user: {} };
-    default:
-      return state;
-  }
-};
+const reducer = (set) => ({
+  user: {token: ""},
+  messages: [],
+  login: (userData) => set(state => ({user: userData})),
+  logout: () => set(state => ({user: {token: ""}})),
+
+});
 
 // create useStore hook
-export const useStore = create(devtools(redux(reducer, initialState)))
+export const useStore = create(devtools(reducer));

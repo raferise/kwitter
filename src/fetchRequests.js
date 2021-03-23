@@ -18,6 +18,16 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
+export const createMessage = (token,text) => {
+  return fetch (baseURL + "/messages", {
+    method:"POST",
+    headers: { Authorization: "Bearer " + token },
+    body: JSON.stringify ({ 
+      text,
+    }),
+  }).then((res) => res.json())
+};
+
 export const createNewUser = (username, displayName, password) => {
   return fetch(baseURL + "users", {
     method: "POST",
@@ -29,7 +39,6 @@ export const createNewUser = (username, displayName, password) => {
     }),
   }).then((res) => res.json());
 }
-
 
 export const getUser = (username) => {
   return fetch(baseURL + "users/" + username).then((res) => res.json());

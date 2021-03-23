@@ -1,15 +1,17 @@
 import React from "react";
-import Login from "../components/Login";
-import Menu from "../components/Menu";
-import { useStore } from "../store/store";
+import { Link } from "react-router-dom";
 
 function Home(props) {
-  const user = useStore((state) => state.user);
   return (
     <>
-      <Menu />
-      <h2>Your favorite microblogging platform</h2>
-      {!user.token && <Login />}
+      <h1>Pages</h1>
+      <ul>
+        <li><Link to="/login" >Login</Link></li>
+        <li><Link to="/signup" >Signup</Link></li>
+        <li><Link to="/user/:username" >Userpage</Link></li>
+        <li><Link to="/user/:username/edit" >Edit</Link></li>
+        <li><Link to="/debug" >TestHub</Link></li>
+      </ul>
     </>
   );
 }

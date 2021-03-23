@@ -5,11 +5,10 @@ import { logoutRequest } from "../fetchRequests";
 
 function Menu(props) {
   const user = useStore((state) => state.user);
-  const dispatch = useStore((state) => state.dispatch);
+  const dispatchLogout = useStore((state) => state.logout);
 
-  const logout = (e) => {
-    logoutRequest(user.token).then(()=>dispatch({type:"LOGOUT"}));
-    
+  const handleLogout = (e) => {
+    logoutRequest(user.token).then(()=>dispatchLogout());
   };
 
   return (
@@ -17,7 +16,7 @@ function Menu(props) {
       <h1>Kwitter</h1>
       <div id="menu-links">
         <Link to="/messages">Messages</Link>
-        {user.token && <button onClick={logout}>Logout</button>}
+        {user.token && <button onClick={handleLogout}>Logout</button>}
       </div>
     </div>
   );

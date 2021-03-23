@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { loginRequest } from "../fetchRequests";
 
-import { LOGIN, useStore } from "../store/store";
+import { useStore } from "../store/store";
 
 function Login(props){
-  const dispatch = useStore((state) => state.dispatch);
+  const dispatchLogin = useStore((state) => state.login);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -14,7 +14,7 @@ function Login(props){
   const handleLogin = (e) => {
     e.preventDefault();
     loginRequest(formData.username, formData.password).then((userData) =>
-      dispatch({ type: LOGIN, payload: userData })
+      dispatchLogin(userData)
     );
   };
 

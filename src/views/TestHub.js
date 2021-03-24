@@ -1,12 +1,14 @@
 import React from "react";
 import { useStore } from "../store/store";
+import { createNewUser } from "../fetchRequests";
 
 function StoreTester(props) {
   const { user, login, logout, alerts, removeAlert, messages, loadMoreMessages } = useStore((state) => state);
   return (
     <>
       <p>
-        <button onClick={event => login("test","test")}>Log in to account test:test</button>
+        <button onClick={event => login("test","test")}>Log in to test account</button>
+        <button onClick={event => createNewUser("test","Test User","test")}>Make test account</button>
         <button onClick={event => login("bad","bad")}>Log in to account bad:bad</button>
         <button onClick={event => logout()}>logout</button>
       </p>

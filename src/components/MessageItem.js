@@ -9,17 +9,23 @@ import LikeIndicator from "./LikeIndicator";
 
 function MessageItem(props) {
   const currentUser = useStore((state) => state.user);
-  const { removeMessage } = useStore((state) => state);
-  const [liked, setLiked] = useState(props.liked || false);
+  const { removeMessage, likeMessage, unlikeMessage } = useStore((state) => state);
   const [user, setUser] = useState({});
   const [deleting, setDeleting] = useState(false);
+  const [liking, setLiking] = useState(false);
+  const [unliking, setUnliking] = useState(false);
   
-  async function handleUnlike(event) {
-    setLiked(false);
+  async function handleLike(event) {
+    setLiking(true);
+    await likeMessage(currentUser.token, props.message.id);
+    setLiking(false);
   }
 
-  async function handleLike(event) {
-    setLiked(true);
+  async function handleUnlike(event) {
+    setUnliking(true);
+    let likeId = props.message.likes.find(like => like.username === currentUser.username).id;
+    await unlikeMessage(currentUser.token, props.message.id, likeId);
+    setUnliking(false);
   }
 
   async function handleDelete(event) {
@@ -36,7 +42,6 @@ function MessageItem(props) {
   return (
     <>
       <Card className="message-item mt-4" style={{opacity:deleting?0.5:1}}>
-        <div style={{position:"absolute", width:"100%", height:"100%", visibility:deleting?"visible":"hidden"}}></div>
         <Card.Body>
           <div className="userheader">
             <Link to={"/users/"+user.username}>
@@ -48,7 +53,7 @@ function MessageItem(props) {
             </div>
             <div>  
               {props.message.username === currentUser.username && <span>
-                <Button variant="outline-danger" onClick={handleDelete} disabled={deleting}>Delete</Button>
+                <Button variant="outline-danger" onClick={handleDelete} disabled={deleting || liking || unliking}>{deleting ? "Deleting..." : "Delete"}</Button>
               </span>}
             </div>
           </div>
@@ -60,11 +65,11 @@ function MessageItem(props) {
             <span className="text-muted mr-2">{props.message.likes.length} Like{props.message.likes.length === 1 ? "" : "s"}</span>
             <span>{props.message.likes.map((like, i) => <LikeIndicator key={"p"+props.message.id+"like"+like.id} like={like} />)}</span>
             <div className="align-right">
-              {liked ? 
-                <Button variant="outline-info" onClick={handleUnlike}>Unlike</Button>
+              {(props.message.likes.findIndex(like => like.username === currentUser.username) !== -1 ? 
+                <Button variant="outline-info" onClick={handleUnlike} disabled={(!currentUser.token) || deleting || liking || unliking}>{unliking ? "Unliking..." : "Unlike"}</Button>
                 :
-                <Button variant="success" onClick={handleLike}>Like</Button>
-              }
+                <Button variant="success" onClick={handleLike} disabled={(!currentUser.token) || deleting || liking || unliking}>{liking ? "Liking..." : "Like"}</Button>
+              )}
             </div>
           </Card.Footer>
       </Card>

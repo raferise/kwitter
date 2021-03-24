@@ -2,19 +2,22 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useStore } from "../store/store";
 
 function MakeAccountCard(props) {
   const { user, addMessage } = useStore((state) => state);
+  const [posting, setPosting] = useState(false);
   const text = useRef();
   
 
-  function handlePost(event) {
+  async function handlePost(event) {
+    setPosting(true);
     event.preventDefault();
-    if (text.current.value.length >= 2 && addMessage(user.token, text.current.value)) {
+    if (text.current.value.length >= 2 && await addMessage(user.token, text.current.value)) {
       text.current.value = "";
     };
+    setPosting(false);
   }
 
   return (
@@ -22,10 +25,10 @@ function MakeAccountCard(props) {
       <Card.Body>
        <Form>
           <Form.Group>
-            <Form.Control as="textarea" size="lg" rows={5} placeholder="Say something..." ref={text}/>
+            <Form.Control as="textarea" size="lg" rows={5} placeholder="Say something..." ref={text} disabled={posting}/>
           </Form.Group>
           <div className="align-right">
-            <Button variant="primary" type="submit" onClick={handlePost}>Post</Button>
+            <Button variant="primary" type="submit" onClick={handlePost} disabled={posting}>{posting ? "Posting..." : "Post"}</Button>
           </div>
         </Form>
       </Card.Body>

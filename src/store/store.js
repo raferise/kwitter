@@ -1,6 +1,6 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import { getMessages, getUser, loginRequest, logoutRequest, deleteMessage, createMessage } from "../fetchRequests";
+import { getMessages, getUser, loginRequest, logoutRequest, deleteMessage, createMessage, addLike, removeLike } from "../fetchRequests";
 
 const makeAlert = function(entropy, header, body) {
   return {
@@ -67,6 +67,40 @@ const reducer = (set) => ({
       lastMessagesUser: username
     }));
   }),
+  likeMessage: async (token, messageId) => {
+    let resp = await addLike(token, messageId);
+    if (resp.statusCode === 200) {
+      set(state => {
+        let index = state.messages.findIndex(msg => msg.id === messageId);
+        let newMessage = {...state.messages[index]};
+        newMessage.likes = [...newMessage.likes, resp.like];
+        let newMessages = [...state.messages];
+        newMessages.splice(index, 1, newMessage);
+        return {messages:newMessages};
+      })
+      return true;
+    } else {
+      set(state => ({alerts:[...state.alerts, makeAlert(state.alerts.length, "Error liking message", resp.message)]}));
+      return false;
+    }
+  },
+  unlikeMessage: async (token, messageId, likeId) => {
+    let resp = await removeLike(token, likeId);
+    if (resp.statusCode === 200) {
+      set(state => {
+        let index = state.messages.findIndex(msg => msg.id === messageId);
+        let newMessage = {...state.messages[index]};
+        newMessage.likes = newMessage.likes.filter(like => like.id !== resp.id);
+        let newMessages = [...state.messages];
+        newMessages.splice(index, 1, newMessage);
+        return {messages:newMessages};
+      })
+      return true;
+    } else {
+      set(state => ({alerts:[...state.alerts, makeAlert(state.alerts.length, "Error liking message", resp.message)]}));
+      return false;
+    }
+  },
   //ALERTS MANAGEMENT
   alerts: [],
   removeAlert: (id) => set(state => ({alerts:state.alerts.filter(a => a.id !== id)})),

@@ -47,7 +47,7 @@ function MessageItem(props) {
               <Link to={"/users/"+user.username}><Card.Subtitle className="mb-2 text-muted">@{props.message.username}</Card.Subtitle></Link>
             </div>
             <div>  
-              {user.username === currentUser.username && <span>
+              {props.message.username === currentUser.username && <span>
                 <Button variant="outline-danger" onClick={handleDelete} disabled={deleting}>Delete</Button>
               </span>}
             </div>

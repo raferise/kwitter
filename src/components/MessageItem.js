@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 import { useStore } from "../store/store";
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
@@ -39,6 +40,11 @@ function MessageItem(props) {
     getUser(props.message.username).then(resp => setUser(resp.user));
   }, [props.message.username]);
 
+  function buttonSpinner(text, spin) {
+    if (!spin) return <span>{text}</span>
+    return <><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/> <span>{text}</span></>
+  }
+
   return (
     <>
       <Card className="message-item mt-4" style={{opacity:deleting?0.5:1}}>
@@ -53,7 +59,7 @@ function MessageItem(props) {
             </div>
             <div>  
               {props.message.username === currentUser.username && <span>
-                <Button variant="outline-danger" onClick={handleDelete} disabled={deleting || liking || unliking}>{deleting ? "Deleting..." : "Delete"}</Button>
+                <Button variant="outline-danger" onClick={handleDelete} disabled={deleting || liking || unliking}>{buttonSpinner("Delete", deleting)}</Button>
               </span>}
             </div>
           </div>
@@ -66,9 +72,9 @@ function MessageItem(props) {
             <span>{props.message.likes.map((like, i) => <LikeIndicator key={"p"+props.message.id+"like"+like.id} like={like} />)}</span>
             <div className="align-right">
               {(props.message.likes.findIndex(like => like.username === currentUser.username) !== -1 ? 
-                <Button variant="outline-info" onClick={handleUnlike} disabled={(!currentUser.token) || deleting || liking || unliking}>{unliking ? "Unliking..." : "Unlike"}</Button>
+                <Button variant="outline-info" onClick={handleUnlike} disabled={(!currentUser.token) || deleting || liking || unliking}>{buttonSpinner("Unlike", unliking)}</Button>
                 :
-                <Button variant="success" onClick={handleLike} disabled={(!currentUser.token) || deleting || liking || unliking}>{liking ? "Liking..." : "Like"}</Button>
+                <Button variant="success" onClick={handleLike} disabled={(!currentUser.token) || deleting || liking || unliking}>{buttonSpinner("Like", liking)}</Button>
               )}
             </div>
           </Card.Footer>

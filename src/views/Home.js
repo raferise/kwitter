@@ -10,7 +10,6 @@ function Home(props) {
   <>
     <Header />
     <MessageList />
-    <TestHub />
   </>
   );
 }

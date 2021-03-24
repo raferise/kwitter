@@ -86,3 +86,9 @@ code {
 .likebar>span:hover a{
   margin-left: 0px;
 }
+
+.center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

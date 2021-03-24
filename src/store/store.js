@@ -62,11 +62,18 @@ const reducer = (set) => ({
     //if username has changed, use no offset and remove previous messages.
     const differentUsername = state.lastMessagesUser !== username;
     let resp = await getMessages(10, differentUsername ? 0 : state.messages.length, username);
-    set(state => ({
-      messages: [...(differentUsername ? [] : state.messages), ...resp.messages],
-      lastMessagesUser: username
-    }));
+    if (resp.messages.length > 0) {
+      set(state => ({
+        messages: [...(differentUsername ? [] : state.messages), ...resp.messages],
+        lastMessagesUser: username,
+        hasMore: true
+      }));
+    } else {
+      set(state => ({hasMore: false}));
+    }
   }),
+  clearMessages: () => set(state => ({messages:[]})),
+  hasMore: true,
   likeMessage: async (token, messageId) => {
     let resp = await addLike(token, messageId);
     if (resp.statusCode === 200) {

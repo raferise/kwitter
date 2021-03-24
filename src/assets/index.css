@@ -69,3 +69,20 @@ code {
 .make-post textarea {
   resize: none;
 }
+
+.likebar {
+  display: flex;
+  align-items: center;
+}
+.likebar img {
+  border-radius: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.likebar a:not(:first-child) {
+  margin-left: -22px;
+  transition: margin-left 0.5s ease;
+}
+.likebar>span:hover a{
+  margin-left: 0px;
+}

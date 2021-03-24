@@ -5,6 +5,7 @@ import { useStore } from "../store/store";
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { getUser } from "../fetchRequests";
+import LikeIndicator from "./LikeIndicator";
 
 function MessageItem(props) {
   const currentUser = useStore((state) => state.user);
@@ -51,17 +52,21 @@ function MessageItem(props) {
               </span>}
             </div>
           </div>
-        <Card.Text className="mt-3">
-          {props.message.text}
-        </Card.Text>
-        <div className="align-right">
-          {liked ? 
-            <Button variant="outline-info" onClick={handleUnlike}>Unlike</Button>
-            :
-            <Button variant="success" onClick={handleLike}>Like</Button>
-          }
-        </div>
+          <Card.Text className="mt-3">
+            {props.message.text}
+          </Card.Text>
         </Card.Body>
+        <Card.Footer className="likebar">
+            <span className="text-muted mr-2">{props.message.likes.length} Like{props.message.likes.length === 1 ? "" : "s"}</span>
+            <span>{props.message.likes.map((like, i) => <LikeIndicator key={"p"+props.message.id+"like"+like.id} like={like} />)}</span>
+            <div className="align-right">
+              {liked ? 
+                <Button variant="outline-info" onClick={handleUnlike}>Unlike</Button>
+                :
+                <Button variant="success" onClick={handleLike}>Like</Button>
+              }
+            </div>
+          </Card.Footer>
       </Card>
     </>
   )

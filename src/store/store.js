@@ -1,6 +1,6 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import { getMessages, getUser, loginRequest, logoutRequest, deleteMessage, createMessage, addLike, removeLike } from "../fetchRequests";
+import { getMessages, getUser, loginRequest, logoutRequest, deleteMessage, createMessage, addLike, removeLike, createNewUser } from "../fetchRequests";
 
 const makeAlert = function(entropy, header, body) {
   return {
@@ -35,6 +35,15 @@ const reducer = (set) => ({
       return false;
     }
   }),
+  signup: async (username, displayName, password) => {
+    let resp = await createNewUser(username, displayName, password);
+    if (resp.statusCode === 200) {
+      return true;
+    } else {
+      set(state => ({alerts:[...state.alerts, makeAlert(state.alerts.length, "Error creating account", resp.message)]}));
+      return false;
+    }
+  },
   //MESSAGES LIST MANAGEMENT
   messages: [],
   lastMessagesUser: undefined,

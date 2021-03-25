@@ -67,7 +67,7 @@ function Edit(props) {
        <div>
          <h1>Edit Your Account</h1>
          <div className="align-right">
-            <Button variant="danger" type="submit" onClick={handleDelete} disabled={editing}> 
+            <Button variant="danger" type="submit" onClick={handleDelete} disabled={editing || deleting}> 
               {buttonSpinner("Delete Your Account", deleting)} 
             </Button>
           </div>
@@ -83,25 +83,25 @@ function Edit(props) {
 
           <Form.Group>
             <Form.Label>New Display Name</Form.Label>
-            <Form.Control type="text" placeholder="Display Name" ref={displayName} disabled={editing} />
+            <Form.Control type="text" placeholder="Display Name" ref={displayName} disabled={editing || deleting} />
             
           </Form.Group>
 
           <Form.Group>
             <Form.Label>New Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" ref={password} disabled={editing} />
+            <Form.Control type="password" placeholder="Password" ref={password} disabled={editing || deleting} />
           </Form.Group>
 
           <Form.Group>
             <Form.Label>New Bio</Form.Label>
-            <Form.Control as="textarea" rows={5} placeholder="About me" ref={about} disabled={editing}/>
+            <Form.Control as="textarea" rows={5} placeholder="About me" ref={about} disabled={editing || deleting}/>
           </Form.Group>
 
           <div className="align-right">
-            <Button variant="primary" className="mr-2" type="submit" onClick={handleSubmit} disabled={editing}> 
+            <Button variant="primary" className="mr-2" type="submit" onClick={handleSubmit} disabled={editing || deleting}> 
               {buttonSpinner("Save", editing)} 
             </Button>
-            <Button variant="secondary" type="cancel" onClick={(event) => setRedirect("/user/"+user.username)} disabled={editing}> 
+            <Button variant="secondary" type="cancel" onClick={(event) => setRedirect("/user/"+user.username)} disabled={editing || deleting}> 
               Cancel
             </Button>
           </div>

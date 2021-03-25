@@ -6,7 +6,7 @@ const baseURL = [
   "https://socialapp-api.herokuapp.com/",
   "https://kwitter-api.herokuapp.com/",
   "https://kwitter-api-b.herokuapp.com/",
-][2];
+][0];
 
 export const loginRequest = (username, password) => {
   return fetch(baseURL + "auth/login", {

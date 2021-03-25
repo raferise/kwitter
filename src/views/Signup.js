@@ -25,14 +25,8 @@ function Signup(props) {
       username.current.value && displayname.current.value && password.current.value &&
       await signup(username.current.value, displayname.current.value, password.current.value) &&
       await login(username.current.value, password.current.value)
-<<<<<<< HEAD
-      ) {
-        setLoggedIn(true);
-      }
-=======
     ) {
       setLoggedIn(true);
->>>>>>> 1dfec25 (fixed brackets)
     }
     setCreating(false);
   }

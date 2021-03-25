@@ -1,11 +1,52 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { useRef, useState } from "react";
+import { useStore } from "../store/store";
+import { createNewUser } from "../fetchRequests";
+import Spinner from "react-bootstrap/Spinner"
+
+
+
 
 
 function Signup(props) {
+
+  const [creating, setCreating] = useState(false);
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const {login, user} = useStore((state) => state);
+  
+
+  const username = useRef()
+  const displayname = useRef()
+  const password = useRef()
+
+  async function handleSubmit(event) {
+    setCreating(true)
+    event.preventDefault();
+    let resp = await createNewUser(username.current.value, displayname.current.value, password.current.value);
+    if (resp.statusCode === 200) {
+      if (await login(username.current.value, password.current.value)) setLoggedIn (true)
+    } else {
+      setCreating(false)
+    }
+
+  }
+
+  function buttonSpinner(text, spin) {
+    if (!spin) return <span>{text}</span>
+    return <><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/> <span>{text}</span></>
+  }
+
+  if (loggedIn)
+  return (
+    <Redirect to="/" />
+
+  )
   return (
     <>
      <Container fluid="md">
@@ -14,23 +55,27 @@ function Signup(props) {
      
 
      <Form>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
+  <Form.Group>
+    <Form.Label>Create Username</Form.Label>
+    <Form.Control type="text" placeholder="Username" ref={username} disabled={creating}  />
     <Form.Text className="text-muted">
-      We'll never share your email with anyone else.
+      This will be your unique Kwitter handle.
     </Form.Text>
   </Form.Group>
 
-  <Form.Group controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
+  <Form.Group>
+    <Form.Label>Display Name</Form.Label>
+    <Form.Control type="text" placeholder="Display Name" ref={displayname} disabled={creating} />
+    
   </Form.Group>
-  <Form.Group controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" label="Remember me" />
+
+  <Form.Group>
+    <Form.Label>Create Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" ref={password} disabled={creating} />
   </Form.Group>
-  <Button variant="primary" type="submit">
-    Submit
+  
+  <Button variant="primary" type="submit" onClick={handleSubmit} disabled={creating}> 
+  {buttonSpinner("Submit", creating)} 
   </Button>
 </Form>
 </Container>

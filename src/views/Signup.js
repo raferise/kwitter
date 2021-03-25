@@ -71,7 +71,6 @@ function Signup(props) {
           </Button>
         </Form>
       </Container>
-      <TestHub />
     </>
   );
 }

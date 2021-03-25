@@ -31,7 +31,7 @@ function Header(props) {
           </div>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item as={Link} to={"/users/"+user.username}>Profile</Dropdown.Item>
+          <Dropdown.Item as={Link} to={"/user/"+user.username}>Profile</Dropdown.Item>
           <Dropdown.Item onClick={handleSignOut}>Sign Out</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

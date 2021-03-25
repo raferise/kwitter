@@ -14,7 +14,7 @@ function LikeIndicator(props) {
 
   return (
     <OverlayTrigger delay={100} overlay={<Tooltip>@{props.like.username}</Tooltip>}>
-      <Link to={"/users/"+props.like.username}>
+      <Link to={"/user/"+props.like.username}>
         <img width={32} height={32} src={user.pictureRaw} alt=""/>
       </Link>
     </OverlayTrigger>

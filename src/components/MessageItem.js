@@ -50,12 +50,12 @@ function MessageItem(props) {
       <Card className="message-item mt-4" style={{opacity:deleting?0.5:1}}>
         <Card.Body>
           <div className="userheader">
-            <Link to={"/users/"+user.username}>
+            <Link to={"/user/"+user.username}>
               <img width={64} height={64} className="mr-3" src={user.pictureRaw} alt=""/>
             </Link>
             <div>
-              <Link to={"/users/"+user.username}><Card.Title>{user.displayName}</Card.Title></Link>
-              <Link to={"/users/"+user.username}><Card.Subtitle className="mb-2 text-muted">@{props.message.username}</Card.Subtitle></Link>
+              <Link to={"/user/"+user.username}><Card.Title>{user.displayName}</Card.Title></Link>
+              <Link to={"/user/"+user.username}><Card.Subtitle className="mb-2 text-muted">@{props.message.username}</Card.Subtitle></Link>
             </div>
             <div>  
               {props.message.username === currentUser.username && <span>

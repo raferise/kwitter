@@ -120,6 +120,7 @@ const reducer = (set) => ({
   //ALERTS MANAGEMENT
   alerts: [],
   removeAlert: (id) => set(state => ({alerts:state.alerts.filter(a => a.id !== id)})),
+  clearAlerts: () => set(state => ({alerts:[]})),
 });
 
 // create useStore hook

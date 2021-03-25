@@ -6,7 +6,6 @@ import Container from "react-bootstrap/Container";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
 import Spinner from "react-bootstrap/Spinner"
-import TestHub from "./TestHub";
 
 function Signup(props) {
   const [creating, setCreating] = useState(false);

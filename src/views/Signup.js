@@ -21,8 +21,11 @@ function Signup(props) {
   async function handleSubmit(event) {
     setCreating(true);
     event.preventDefault();
-    if (await signup(username.current.value, displayname.current.value, password.current.value)) {
-      if (await login(username.current.value, password.current.value)) {
+    if (
+      username.current.value && displayname.current.value && password.current.value &&
+      await signup(username.current.value, displayname.current.value, password.current.value) &&
+      await login(username.current.value, password.current.value)
+      ) {
         setLoggedIn(true);
       }
     }

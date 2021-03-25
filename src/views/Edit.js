@@ -6,12 +6,13 @@ import Container from "react-bootstrap/Container";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
 import Spinner from "react-bootstrap/Spinner"
-import { getUser, logoutRequest } from "../fetchRequests";
+import Modal from "react-bootstrap/Modal";
 
 function Edit(props) {
   const [editing, setEditing] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const { user, edit, deleteAccount, login }  = useStore((state) => state);
 
@@ -68,7 +69,7 @@ function Edit(props) {
          <h1 className="inline-header">Edit Your Account</h1>
          <div className="align-right">
              <span>
-              <Button variant="danger" type="submit" onClick={handleDelete} disabled={editing || deleting}> 
+              <Button variant="danger" type="submit" onClick={(event) => setShowModal(true)} disabled={editing || deleting}> 
                 {buttonSpinner("Delete Account", deleting)} 
               </Button>
             </span>
@@ -109,6 +110,20 @@ function Edit(props) {
           </div>
         </Form>
       </Container>
+      <Modal show={showModal} onHide={(event) => setShowModal(false)}>
+        <Modal.Header>
+          <Modal.Title>Delete your account</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>This will delete your account, all your messages, and all your likes.<br />This action cannot be undone.</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={(event) => setShowModal(false)}>Cancel</Button>
+          <Button variant="danger" type="submit" onClick={(event) => {setShowModal(false); handleDelete(event)}}>Permanently Delete My Account</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

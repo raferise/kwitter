@@ -64,15 +64,17 @@ function Edit(props) {
   return (
     <>
      <Container fluid="md" className="mt-5">
-       <div>
-         <h1>Edit Your Account</h1>
+       <div className="flex-hcenter">
+         <h1 className="inline-header">Edit Your Account</h1>
          <div className="align-right">
-            <Button variant="danger" type="submit" onClick={handleDelete} disabled={editing || deleting}> 
-              {buttonSpinner("Delete Your Account", deleting)} 
-            </Button>
+             <span>
+              <Button variant="danger" type="submit" onClick={handleDelete} disabled={editing || deleting}> 
+                {buttonSpinner("Delete Account", deleting)} 
+              </Button>
+            </span>
           </div>
        </div>
-        <Form>
+        <Form className="mt-5">
           <Form.Group>
             <Form.Label>Username</Form.Label>
             <Form.Control type="text" placeholder="Username" ref={username} disabled  />

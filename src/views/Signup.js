@@ -44,7 +44,7 @@ function Signup(props) {
 
   return (
     <>
-     <Container fluid="md">
+     <Container fluid="md" className="mt-5">
        <h1>Signup for Kwitter!</h1>
         <Form>
           <Form.Group>

@@ -51,10 +51,10 @@ export const getMessages = (limit, offset, username) => {
   return fetch(baseURL + "messages" + queryParams).then((res) => res.json());
 };
 
-export const updateUser = (token,username, password, about, displayName) => {
+export const updateUser = (token, username, displayName, password, about) => {
   return fetch(baseURL + "users/" + username, {
     method: "PATCH",
-    headers: { Authorization: "Bearer " + token }, 
+    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" }, 
     body: JSON.stringify({
       password,
       about,

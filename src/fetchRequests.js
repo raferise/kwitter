@@ -1,5 +1,12 @@
+const cache = {
+  users:{}
+}
 
-const baseURL = "https://socialapp-api.herokuapp.com/";
+const baseURL = [
+  "https://socialapp-api.herokuapp.com/",
+  "https://kwitter-api.herokuapp.com/",
+  "https://kwitter-api-b.herokuapp.com/",
+][0];
 
 export const loginRequest = (username, password) => {
   return fetch(baseURL + "auth/login", {
@@ -18,17 +25,11 @@ export const logoutRequest = (token) => {
   }).then((res) => res.json());
 };
 
-export const pictureRequest = (username) => {
-  return fetch(baseURL + `users/${username}/picture`, {
-  })
-  .then((res) => res.json());
-};
-
 export const deleteMessage = (token, messageId) => {
   return fetch(baseURL + "messages/" + messageId, {
     method: "DELETE",
     headers: { Authorization: "Bearer " + token },
-  });
+  }).then((res => res.json()));
 };
 
 export const addLike = (token, messageId) => {
@@ -62,11 +63,11 @@ export const updateUser = (token,username, password, about, displayName) => {
   }).then((res) => res.json());
 };
 
-export const createMessage = (token,text) => {
-  return fetch (baseURL + "/messages", {
-    method:"POST",
-    headers: { Authorization: "Bearer " + token },
-    body: JSON.stringify ({ 
+export const createMessage = (token, text) => {
+  return fetch (baseURL + "messages", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+    body: JSON.stringify({ 
       text,
     }),
   }).then((res) => res.json());
@@ -84,9 +85,34 @@ export const createNewUser = (username, displayName, password) => {
   }).then((res) => res.json());
 };
 
-export const getUser = (username) => {
-  return fetch(baseURL + "users/" + username).then((res) => res.json());
+export const getUser = (username, useCache=true) => {
+  let cached = cache.users[username];
+  if (cached && useCache) return cached;
+  let request = fetch(baseURL + "users/" + username).then(res => res.json()).then(async (res) => {
+    res.user.pictureRaw = await getPicture(res.user.username);
+    return res;
+  });
+  cache.users[username] = request;
+  return request;
 };
+
+export const getPicture = async (username) => {
+  let resp = await fetch(baseURL + `users/${username}/picture`)
+  if (resp.ok) {
+    return await convertBlobToBase64(await resp.blob());
+  } else {
+    return "placeholder.png";
+  }
+}
+//https://gist.github.com/n1ru4l/dc99062577b746e0783410b1298ab897
+const convertBlobToBase64 = blob => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onerror = reject;
+  reader.onload = () => {
+      resolve(reader.result);
+  };
+  reader.readAsDataURL(blob);
+});
 
 export const deleteUser = (token, username) => {
   return fetch(baseURL + "users/" + username, {

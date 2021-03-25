@@ -1,18 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import MessageList from "../components/MessageList";
+import TestHub from "../views/TestHub";
+
+
 
 function Home(props) {
   return (
-    <>
-      <h1>Pages</h1>
-      <ul>
-        <li><Link to="/login" >Login</Link></li>
-        <li><Link to="/signup" >Signup</Link></li>
-        <li><Link to="/user/:username" >Userpage</Link></li>
-        <li><Link to="/user/:username/edit" >Edit</Link></li>
-        <li><Link to="/debug" >TestHub</Link></li>
-      </ul>
-    </>
+  <>
+    <Header />
+    <MessageList />
+  </>
   );
 }
 

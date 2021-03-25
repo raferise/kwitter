@@ -78,6 +78,7 @@ code {
   border-radius: 100%;
   object-fit: cover;
   border: 1px solid #bebebe;
+  background: #f7f7f7;
 }
 .likebar a:not(:first-child) {
   margin-left: -22px;

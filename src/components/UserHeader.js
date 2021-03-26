@@ -11,8 +11,8 @@ function UserHeader(props) {
   const logout = useStore((state) => state.logout);
 
   useEffect(() => {
-    getUser(props.username).then((user) => setUser(user));
-  }, [getUser, props.username]);
+    getUser(props.username).then(resp => setUser(resp.user));
+  }, [props.username]);
 
   console.log(user);
 
@@ -22,7 +22,6 @@ function UserHeader(props) {
 
   return (
     <>
-      {JSON.stringify(props.username)}
       <Navbar bg="light" expand="lg" sticky="top">
         <Navbar.Brand className="mr-auto" as={Link} to="/">
           Kwitter Feed

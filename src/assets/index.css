@@ -103,7 +103,6 @@ code {
   align-items: center;
   justify-content: flex-end;
   padding: 0 10vw;
-  transition: opacity 5s linear;
 }
 .alerts-modals>div {
   width: 100%;
@@ -116,5 +115,16 @@ code {
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

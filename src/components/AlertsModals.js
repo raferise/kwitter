@@ -11,16 +11,13 @@ function Header(props) {
   useEffect(() => {
     clearTimeout(stageTimer.current);
     switch(clearStage) {
-      case 0: //Idle, triggered by a new non-empty alert list or mouse movement
+      case 0: // Idle/reset - triggered by a new non-empty alert list or mouse movement. Clears fade animation.
         stageTimer.current = setTimeout(() => setClearStage(1), 1000);
         break;
-      case 1: //Preparing to fade
-        stageTimer.current = setTimeout(() => setClearStage(2), 5000);
+      case 1: // Fading - animation makes first half solid and last half fade out
+        stageTimer.current = setTimeout(() => setClearStage(2), 10000);
         break;
-      case 2: //Fading
-        stageTimer.current = setTimeout(() => setClearStage(3), 5000);
-        break;
-      case 3: //Emptied
+      case 2: // Emptied
         clearAlerts();
         break;
       default:
@@ -34,9 +31,9 @@ function Header(props) {
   }, [alerts]);
 
   const stageStyles = [
-    {transitionDuration:"0s",opacity:1},
-    {opacity:1},
-    {opacity:0},
+    {animation:""},
+    {animation:"fade-out 10s linear forwards"},
+    {visibility:"hidden"}
   ]
 
   return (

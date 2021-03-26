@@ -144,6 +144,7 @@ code {
 .big-portrait {
   border-radius: 100%;
   z-index: 1;
+  object-fit: cover;
 }
 
 .text-sm {

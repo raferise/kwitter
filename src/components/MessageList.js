@@ -61,7 +61,7 @@ function MessageList(props) {
             :
             (user.token) ? <MakePostCard /> : <MakeAccountCard /> //logged in on homepage
           }
-          {(props.username ? messages.filter(msg => msg.username === props.userame) : messages)
+          {(props.username ? messages.filter(msg => msg.username === props.username) : messages)
             .map(msg => (
               <MessageItem key={"m"+msg.id} message={msg}/>
           ))}

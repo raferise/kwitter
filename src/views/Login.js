@@ -3,6 +3,9 @@ import { loginRequest } from "../fetchRequests";
 
 import { useStore } from "../store/store";
 
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
 function Login(props){
   const dispatchLogin = useStore((state) => state.login);
 
@@ -26,26 +29,26 @@ function Login(props){
 
   return (
     <>
-      <form id="login-form" onSubmit={handleLogin}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          autoFocus
-          required
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          required
-          onChange={handleChange}
-        />
-        <button type="submit">Login</button>
-      </form>
+    <Form className="form-setup">
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Phone, Email, or Username</Form.Label>
+        <Form.Control type="email" placeholder="Phone, Email, or Username" />
+        <Form.Text className="text-muted">
+          We'll never share your login info with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <Form.Group controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Remember Me" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+      Login
+      </Button>
+  </Form>
     </>
   );
 };

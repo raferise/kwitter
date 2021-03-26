@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/kwitter-infinitymeme/static/css/main.c8fe88e1.chunk.css",
-    "main.js": "/kwitter-infinitymeme/static/js/main.3cfb0337.chunk.js",
-    "main.js.map": "/kwitter-infinitymeme/static/js/main.3cfb0337.chunk.js.map",
+    "main.js": "/kwitter-infinitymeme/static/js/main.2c33c40f.chunk.js",
+    "main.js.map": "/kwitter-infinitymeme/static/js/main.2c33c40f.chunk.js.map",
     "runtime-main.js": "/kwitter-infinitymeme/static/js/runtime-main.c261da01.js",
     "runtime-main.js.map": "/kwitter-infinitymeme/static/js/runtime-main.c261da01.js.map",
     "static/css/2.4c97ca4f.chunk.css": "/kwitter-infinitymeme/static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.2bc19ccc.chunk.js": "/kwitter-infinitymeme/static/js/2.2bc19ccc.chunk.js",
-    "static/js/2.2bc19ccc.chunk.js.map": "/kwitter-infinitymeme/static/js/2.2bc19ccc.chunk.js.map",
+    "static/js/2.70cf6b7e.chunk.js": "/kwitter-infinitymeme/static/js/2.70cf6b7e.chunk.js",
+    "static/js/2.70cf6b7e.chunk.js.map": "/kwitter-infinitymeme/static/js/2.70cf6b7e.chunk.js.map",
     "index.html": "/kwitter-infinitymeme/index.html",
     "static/css/2.4c97ca4f.chunk.css.map": "/kwitter-infinitymeme/static/css/2.4c97ca4f.chunk.css.map",
     "static/css/main.c8fe88e1.chunk.css.map": "/kwitter-infinitymeme/static/css/main.c8fe88e1.chunk.css.map",
-    "static/js/2.2bc19ccc.chunk.js.LICENSE.txt": "/kwitter-infinitymeme/static/js/2.2bc19ccc.chunk.js.LICENSE.txt"
+    "static/js/2.70cf6b7e.chunk.js.LICENSE.txt": "/kwitter-infinitymeme/static/js/2.70cf6b7e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c261da01.js",
     "static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.2bc19ccc.chunk.js",
+    "static/js/2.70cf6b7e.chunk.js",
     "static/css/main.c8fe88e1.chunk.css",
-    "static/js/main.3cfb0337.chunk.js"
+    "static/js/main.2c33c40f.chunk.js"
   ]
 }

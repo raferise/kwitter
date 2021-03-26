@@ -5,9 +5,10 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
-import Spinner from "react-bootstrap/Spinner"
+import SpinnerContent from "./SpinnerContent";
 import Modal from "react-bootstrap/Modal";
 import Header from "../components/Header";
+import { Spinner } from "react-bootstrap";
 
 function Edit(props) {
   const [editing, setEditing] = useState(false);
@@ -43,11 +44,6 @@ function Edit(props) {
     setDeleting(false);
   }
 
-  function buttonSpinner(text, spin) {
-    if (!spin) return <span>{text}</span>
-    return <><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/> <span>{text}</span></>
-  }
-
   useEffect(() => {
     if (user.token) {
       username.current.value = user.username;
@@ -72,7 +68,7 @@ function Edit(props) {
          <div className="align-right">
              <span>
               <Button variant="danger" type="submit" onClick={(event) => setShowModal(true)} disabled={editing || deleting}> 
-                {buttonSpinner("Delete Account", deleting)} 
+                <SpinnerContent spinWhen={deleting}>Delete Account</SpinnerContent>
               </Button>
             </span>
           </div>
@@ -104,7 +100,7 @@ function Edit(props) {
 
           <div className="align-right">
             <Button variant="primary" className="mr-2" type="submit" onClick={handleSubmit} disabled={editing || deleting}> 
-              {buttonSpinner("Save", editing)} 
+              <SpinnerContent spinWhen={editing}>Save</SpinnerContent>
             </Button>
             <Button variant="secondary" type="cancel" onClick={(event) => setRedirect("/user/"+user.username)} disabled={editing || deleting}> 
               Cancel

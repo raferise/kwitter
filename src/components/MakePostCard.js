@@ -2,9 +2,9 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Spinner from "react-bootstrap/Spinner";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
+import SpinnerContent from "./SpinnerContent";
 
 function MakeAccountCard(props) {
   const { user, addMessage } = useStore((state) => state);
@@ -21,11 +21,6 @@ function MakeAccountCard(props) {
     setPosting(false);
   }
 
-  function buttonSpinner(text, spin) {
-    if (!spin) return <span>{text}</span>
-    return <><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/> <span>{text}</span></>
-  }
-
   return (
     <Card className="make-post mt-4">
       <Card.Body>
@@ -34,7 +29,9 @@ function MakeAccountCard(props) {
             <Form.Control as="textarea" size="lg" rows={5} placeholder="Say something..." ref={text} disabled={posting}/>
           </Form.Group>
           <div className="align-right">
-            <Button variant="primary" type="submit" onClick={handlePost} disabled={posting}>{buttonSpinner("Post", posting)}</Button>
+            <Button variant="primary" type="submit" onClick={handlePost} disabled={posting}>
+              <SpinnerContent spinWhen={posting}>Post</SpinnerContent>
+            </Button>
           </div>
         </Form>
       </Card.Body>

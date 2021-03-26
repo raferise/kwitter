@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
-import Spinner from "react-bootstrap/Spinner";
+import SpinnerContent from "../components/SpinnerContent"
 import Header from "../components/Header";
 
 function Signup(props) {
@@ -30,12 +30,6 @@ function Signup(props) {
     }
     setCreating(false);
   }
-
-  function buttonSpinner(text, spin) {
-    if (!spin) return <span>{text}</span>
-    return <><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/> <span>{text}</span></>
-  }
-
 
   if (loggedIn)
   return (
@@ -68,7 +62,7 @@ function Signup(props) {
           </Form.Group>
           
           <Button variant="primary" type="submit" onClick={handleSubmit} disabled={creating}> 
-            {buttonSpinner("Create Account", creating)} 
+            <SpinnerContent spinWhen={creating}>Create Account</SpinnerContent>
           </Button>
         </Form>
       </Container>

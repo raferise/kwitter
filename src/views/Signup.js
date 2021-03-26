@@ -5,7 +5,8 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
-import Spinner from "react-bootstrap/Spinner"
+import Spinner from "react-bootstrap/Spinner";
+import Header from "../components/Header";
 
 function Signup(props) {
   const [creating, setCreating] = useState(false);
@@ -43,6 +44,7 @@ function Signup(props) {
 
   return (
     <>
+      <Header />
      <Container fluid="md" className="mt-5">
         <h1>Signup for Kwitter!</h1>
         <Form className="mt-5">

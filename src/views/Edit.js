@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { useStore } from "../store/store";
 import Spinner from "react-bootstrap/Spinner"
 import Modal from "react-bootstrap/Modal";
+import Header from "../components/Header";
 
 function Edit(props) {
   const [editing, setEditing] = useState(false);
@@ -64,8 +65,9 @@ function Edit(props) {
 
   return (
     <>
-     <Container fluid="md" className="mt-5">
-       <div className="flex-hcenter">
+      <Header />
+      <Container fluid="md" className="mt-5">
+        <div className="flex-hcenter">
          <h1 className="inline-header">Edit Your Account</h1>
          <div className="align-right">
              <span>
@@ -74,7 +76,7 @@ function Edit(props) {
               </Button>
             </span>
           </div>
-       </div>
+        </div>
         <Form className="mt-5">
           <Form.Group>
             <Form.Label>Username</Form.Label>

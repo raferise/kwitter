@@ -6,12 +6,13 @@ import Container from "react-bootstrap/Container";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
 import Spinner from "react-bootstrap/Spinner"
+import Header from "../components/Header";
 
 function Signup(props) {
   const [loggingIn, setLoggingIn] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const {login, signup}  = useStore((state) => state);
+  const {login}  = useStore((state) => state);
 
   const username = useRef();
   const password = useRef();
@@ -41,7 +42,8 @@ function Signup(props) {
 
   return (
     <>
-     <Container fluid="md" className="mt-5">
+      <Header />
+      <Container fluid="md" className="mt-5">
         <h1>Welcome to Kwitter!</h1>
         <Form className="mt-5">
           <Form.Group>

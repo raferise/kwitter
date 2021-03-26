@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button";
 import { useStore } from "../store/store";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,56 +7,38 @@ import Card from "react-bootstrap/Card";
 import { getUser } from "../fetchRequests";
 
 function UserHeader(props) {
+  const currentUser = useStore((state) => state.user)
   const [user, setUser] = useState({});
-  const logout = useStore((state) => state.logout);
 
   useEffect(() => {
     getUser(props.username).then(resp => setUser(resp.user));
   }, [props.username]);
 
-  console.log(user);
-
-  function handleSignOut() {
-    logout();
-  }
-
   return (
     <>
       <Navbar bg="light" expand="lg" sticky="top">
-        <Navbar.Brand className="mr-auto" as={Link} to="/">
-          Kwitter Feed
+        <Navbar.Brand className="" as={Link} to="/">
+          {"❮"}
         </Navbar.Brand>
-        <Card style={{ width: "35rem" }}>
-          <Card.Body>
-            <Card.Title>About</Card.Title>
-            <Card.Text>{user.about}</Card.Text>
-          </Card.Body>
-        </Card>
-        <Dropdown className="invisible-dropdown">
-          <Dropdown.Toggle variant="none">
-            <div className="userheader">
-              <div>
-                <Card.Title>{user.displayName}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  @{user.username}
-                </Card.Subtitle>
-              </div>
-              <img
-                width={64}
-                height={64}
-                className="ml-3"
-                src={user.pictureRaw}
-                alt="Profile Pic"
-              />
+        <img
+          width={128}
+          height={128}
+          className="ml-3 big-portrait"
+          src={user.pictureRaw}
+          alt="Profile Pic"
+        />
+        <Card.Body>
+          <div>
+            <div>
+              <Card.Title>{user.displayName}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                @{user.username}
+              </Card.Subtitle>
             </div>
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={"/user/" + user.username}>
-              Profile
-            </Dropdown.Item>
-            <Dropdown.Item onClick={handleSignOut}>Sign Out</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+          </div>
+          <Card.Text>{user.about}</Card.Text>
+        </Card.Body>
+        {user && currentUser.token && currentUser.username === user.username && <Link to={"/user/"+user.username+"/edit"}><Button variant="primary">Edit Profile</Button></Link>}
       </Navbar>
     </>
   );

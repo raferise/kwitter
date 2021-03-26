@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import UserHeader from "../components/UserHeader";
+import MessageList from "../components/MessageList";
 
 function Userpage(props) {
   return (
     <>
-      <h1>Userpage Placeholder</h1>
-      <Link to={props.location.pathname+"/edit"}>{props.match.params.username}</Link>
+      <UserHeader username={props.match.params.username} />
+      <MessageList username={props.match.params.username} />
     </>
   );
 }

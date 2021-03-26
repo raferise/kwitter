@@ -48,14 +48,14 @@ function Edit(props) {
   }
 
   useEffect(() => {
-    if (user.token && (!editing)) {
+    if (user.token) {
       username.current.value = user.username;
       displayName.current.value = user.displayName;
       about.current.value = user.about;
     } else {
       setRedirect("/");
     }
-  }, [user, editing])
+  }, [user])
 
   if (redirect)
   return (
@@ -78,7 +78,7 @@ function Edit(props) {
         <Form className="mt-5">
           <Form.Group>
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Username" ref={username} disabled  />
+            <Form.Control type="text" placeholder="Username" ref={username} readOnly  />
             <Form.Text className="text-muted">
               You can't change your unique Kwitter handle
             </Form.Text>

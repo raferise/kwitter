@@ -44,8 +44,8 @@ function Signup(props) {
   return (
     <>
      <Container fluid="md" className="mt-5">
-       <h1>Signup for Kwitter!</h1>
-        <Form>
+        <h1>Signup for Kwitter!</h1>
+        <Form className="mt-5">
           <Form.Group>
             <Form.Label>Create Username</Form.Label>
             <Form.Control type="text" placeholder="Username" ref={username} disabled={creating}  />
@@ -66,7 +66,7 @@ function Signup(props) {
           </Form.Group>
           
           <Button variant="primary" type="submit" onClick={handleSubmit} disabled={creating}> 
-            {buttonSpinner("Submit", creating)} 
+            {buttonSpinner("Create Account", creating)} 
           </Button>
         </Form>
       </Container>

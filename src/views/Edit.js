@@ -5,10 +5,9 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { useRef, useState } from "react";
 import { useStore } from "../store/store";
-import SpinnerContent from "./SpinnerContent";
+import SpinnerContent from "../components/SpinnerContent";
 import Modal from "react-bootstrap/Modal";
 import Header from "../components/Header";
-import { Spinner } from "react-bootstrap";
 
 function Edit(props) {
   const [editing, setEditing] = useState(false);
@@ -67,7 +66,7 @@ function Edit(props) {
          <h1 className="inline-header">Edit Your Account</h1>
          <div className="align-right">
              <span>
-              <Button variant="danger" type="submit" onClick={(event) => setShowModal(true)} disabled={editing || deleting}> 
+              <Button variant="danger" onClick={(event) => setShowModal(true)} disabled={editing || deleting}> 
                 <SpinnerContent spinWhen={deleting}>Delete Account</SpinnerContent>
               </Button>
             </span>

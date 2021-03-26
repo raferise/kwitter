@@ -18,7 +18,7 @@ function UserHeader(props) {
     <>
       <Navbar bg="light" expand="lg" sticky="top">
         <Navbar.Brand className="" as={Link} to="/">
-          {"❮"}
+          <Button block variant="outline-secondary">{"❮"}</Button>
         </Navbar.Brand>
         <img
           width={128}

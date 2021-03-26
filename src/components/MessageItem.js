@@ -45,11 +45,19 @@ function MessageItem(props) {
     return <><Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/> <span>{text}</span></>
   }
 
+  function getDateString(date) {
+    return (
+      date.toLocaleDateString([], { year:'numeric', month:'short', day:'numeric' }) +
+      " at " +
+      date.toLocaleTimeString([], {timeStyle: 'short'})
+    )
+  }
+
   return (
     <>
       <Card className="message-item mt-4" style={{opacity:deleting?0.5:1}}>
         <Card.Body>
-          <div className="userheader">
+          <div className="userheader pb-4">
             <Link to={"/user/"+user.username}>
               <img width={64} height={64} className="mr-3" src={user.pictureRaw} alt=""/>
             </Link>
@@ -57,14 +65,19 @@ function MessageItem(props) {
               <Link to={"/user/"+user.username}><Card.Title>{user.displayName}</Card.Title></Link>
               <Link to={"/user/"+user.username}><Card.Subtitle className="mb-2 text-muted">@{props.message.username}</Card.Subtitle></Link>
             </div>
-            <div>  
+            <div>
               {props.message.username === currentUser.username && <span>
-                <Button variant="outline-danger" onClick={handleDelete} disabled={deleting || liking || unliking}>{buttonSpinner("Delete", deleting)}</Button>
+                <Button variant="outline-danger" onClick={handleDelete} disabled={deleting || liking || unliking} className="ml-2">
+                  {buttonSpinner("Delete", deleting)}
+                  </Button>
               </span>}
             </div>
           </div>
           <Card.Text className="mt-3">
             {props.message.text}
+          </Card.Text>
+          <Card.Text className="text-muted text-sm datebar">
+            Posted {getDateString(new Date(props.message.createdAt))}
           </Card.Text>
         </Card.Body>
         <Card.Footer className="likebar">

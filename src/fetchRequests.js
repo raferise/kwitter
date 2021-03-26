@@ -101,7 +101,7 @@ export const getPicture = async (username) => {
   if (resp.ok) {
     return await convertBlobToBase64(await resp.blob());
   } else {
-    return "/placeholder.png";
+    return "/kwitter-infinitymeme/placeholder.png";
   }
 }
 //https://gist.github.com/n1ru4l/dc99062577b746e0783410b1298ab897

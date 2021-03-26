@@ -6,6 +6,7 @@ import Userpage from "./views/Userpage";
 import Edit from "./views/Edit";
 import TestHub from "./views/TestHub";
 import NotFound from "./views/NotFound";
+import AlertsModals from "./components/AlertsModals";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/debug" component={TestHub} />
         <Route component={NotFound} />
       </Switch>
+      <AlertsModals />
     </div>
   );
 }

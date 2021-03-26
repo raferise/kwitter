@@ -78,6 +78,7 @@ code {
   border-radius: 100%;
   object-fit: cover;
   border: 1px solid #bebebe;
+  background: #f7f7f7;
 }
 .likebar a:not(:first-child) {
   margin-left: -22px;
@@ -92,10 +93,47 @@ code {
   align-items: center;
   text-align: center;
 }
+
 .inline-header {
   display: inline;
 }
 .flex-hcenter {
   display: flex;
   align-items: center;
+}
+
+.alerts-modals {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10vw;
+}
+.alerts-modals>div {
+  width: 100%;
+  animation: fade-in 0.25s ease forwards;
+}
+@keyframes fade-in {
+  0% {
+    margin-bottom: -50px;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

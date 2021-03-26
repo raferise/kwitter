@@ -94,6 +94,14 @@ code {
   text-align: center;
 }
 
+.inline-header {
+  display: inline;
+}
+.flex-hcenter {
+  display: flex;
+  align-items: center;
+}
+
 .alerts-modals {
   position: fixed;
   bottom: 0;

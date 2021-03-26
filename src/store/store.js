@@ -1,6 +1,6 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import { getMessages, getUser, loginRequest, logoutRequest, deleteMessage, createMessage, addLike, removeLike, createNewUser } from "../fetchRequests";
+import { getMessages, getUser, loginRequest, logoutRequest, deleteMessage, createMessage, addLike, removeLike, createNewUser, updateUser, deleteUser } from "../fetchRequests";
 
 const makeAlert = function(entropy, header, body) {
   return {
@@ -41,6 +41,25 @@ const reducer = (set) => ({
       return true;
     } else {
       set(state => ({alerts:[...state.alerts, makeAlert(state.alerts.length, "Error creating account", resp.message)]}));
+      return false;
+    }
+  },
+  edit: async (token, username, displayName, password, about) => {
+    let resp = await updateUser(token, username, displayName, password, about);
+    if (resp.statusCode === 200) {
+      return true;
+    } else {
+      set(state => ({alerts:[...state.alerts, makeAlert(state.alerts.length, "Error updating account", resp.message)]}));
+      return false;
+    }
+  },
+  deleteAccount: async (token, username) => {
+    let resp = await deleteUser(token, username);
+    if (resp.statusCode === 200) {
+      set(state => ({user: {token: ""}}));
+      return true;
+    } else {
+      set(state => ({alerts:[...state.alerts, makeAlert(state.alerts.length, "Error deleting account", resp.message)]}));
       return false;
     }
   },

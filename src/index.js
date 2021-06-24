@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="kwitter-infinitymeme">
+    <BrowserRouter basename="kwitter">
       <App />
     </BrowserRouter>
   </React.StrictMode>,

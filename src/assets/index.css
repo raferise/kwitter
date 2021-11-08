@@ -11,3 +11,145 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.kwitter-body {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+.userheader img {
+  object-fit: cover;
+  border-radius: 100%;
+  background: #e0e0e0;
+}
+.userheader {
+  display: flex;
+}
+.message-item .userheader {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 1rem;
+}
+.userheader::after {
+  display: none;
+}
+.align-right, .userheader>div:last-of-type {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.userheader>div:only-of-type {
+  flex-direction: column;
+  text-align: right;
+}
+.invisible-dropdown::after {
+  display: none;
+}
+.invisible-dropdown .dropdown-toggle {
+  display: contents;
+}
+.invisible-dropdown .dropdown-toggle::after {
+  display: none;
+}
+
+.navbar-brand {
+  font-size: xx-large !important;
+}
+.navbar-brand button {
+  height: 6.5rem;
+}
+
+.make-account-suggestion {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.make-account-suggestion h2 {
+  font-size: 2.5rem;
+}
+
+.make-post textarea {
+  resize: none;
+}
+
+.likebar {
+  display: flex;
+  align-items: center;
+}
+.likebar img {
+  border-radius: 100%;
+  object-fit: cover;
+  border: 1px solid #bebebe;
+  background: #f7f7f7;
+}
+.likebar a:not(:first-child) {
+  margin-left: -22px;
+  transition: margin-left 0.5s ease;
+}
+.likebar>span:hover a{
+  margin-left: 0px;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.inline-header {
+  display: inline;
+}
+.flex-hcenter {
+  display: flex;
+  align-items: center;
+}
+
+.alerts-modals {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10vw;
+}
+.alerts-modals>div {
+  width: 100%;
+  animation: fade-in 0.25s ease forwards;
+}
+@keyframes fade-in {
+  0% {
+    margin-bottom: -50px;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.big-portrait {
+  border-radius: 100%;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.text-sm {
+  font-size: 0.8rem;
+}
+.datebar {
+  margin-bottom: -1.2em !important;
+}

@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/index.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from "./App";
 
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="kwitter">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
